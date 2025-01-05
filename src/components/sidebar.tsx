@@ -14,9 +14,7 @@ interface SidebarProps {
 export function Sidebar({
   chatImageEnabled,
   setChatImageEnabled,
-  selectedChat,
-  setSelectedChat,
-  closeSidebar,
+
   children,
 }: SidebarProps) {
   return (

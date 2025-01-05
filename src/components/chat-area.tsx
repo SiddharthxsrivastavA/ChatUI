@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,7 +44,10 @@ export function ChatArea({ selectedChat, setSelectedChat }: ChatAreaProps) {
     useState<Record<string, Message[]>>(initialMessages);
   const [inputMessage, setInputMessage] = useState("");
 
-  const currentChat = selectedChat ? messages[selectedChat] : [];
+  const currentChat = useMemo(
+    () => (selectedChat ? messages[selectedChat] : []),
+    [selectedChat, messages]
+  );
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
