@@ -1,100 +1,150 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Instagram, Twitter, Send, Menu } from "lucide-react";
+import Link from "next/link";
+import { ChatList } from "@/components/chat-list";
+import { ChatArea } from "@/components/chat-area";
+import { Sidebar } from "@/components/sidebar";
+import { Separator } from "@/components/ui/separator";
+
+export default function ChatInterface() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [selectedChat, setSelectedChat] = useState<string | null>(null);
+  const [chatImageEnabled, setChatImageEnabled] = useState(true);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex flex-col h-screen bg-black text-white">
+      {/* Navigation */}
+      <nav className="border-b border-gray-800 p-4 m-4 mt-0 rounded-b-lg ">
+        <div className="max-w-[1400px] mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-4 lg:gap-8">
+            <Link
+              href="/"
+              className="text-[#E6A5A5] text-xl lg:text-3xl font-semibold"
+            >
+              Logo
+            </Link>
+            <Separator orientation="vertical" className="h-8 mx-2" />
+            <div className="hidden md:flex items-center gap-4 lg:gap-6">
+              <Link
+                href="/explore"
+                className="text-[#E6A5A5] flex items-center gap-2 text-sm"
+              >
+                <span>🏠</span> Explore
+              </Link>
+              <Link href="/create" className="flex items-center gap-2 text-sm">
+                <span>✨</span> Create
+              </Link>
+              <Link href="/edit" className="text-sm flex items-center gap-2">
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-pen"
+                  >
+                    <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                  </svg>
+                </span>
+                Edit
+              </Link>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden">
+                  <Menu className="w-5 h-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="left"
+                className="w-[280px] sm:w-[320px] bg-[#121212] border-gray-800 p-6"
+              >
+                <Sidebar
+                  chatImageEnabled={chatImageEnabled}
+                  setChatImageEnabled={setChatImageEnabled}
+                  selectedChat={selectedChat}
+                  setSelectedChat={setSelectedChat}
+                  closeSidebar={() => setIsSidebarOpen(false)}
+                >
+                  <ChatList
+                    selectedChat={selectedChat}
+                    setSelectedChat={(chatId) => {
+                      setSelectedChat(chatId);
+                      setIsSidebarOpen(false);
+                    }}
+                  />
+                </Sidebar>
+              </SheetContent>
+            </Sheet>
+            <Button className="bg-[#E6A5A5] text-black hover:bg-[#d99595] ">
+              Login
+            </Button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+      </nav>
+
+      <div className="flex flex-1 overflow-hidden mx-4 mb-4">
+        {/* Sidebar - Desktop */}
+        <div className="hidden md:block w-[280px] lg:w-[320px] bg-[#121212] rounded-lg overflow-hidden">
+          <div className="p-6 h-full overflow-y-auto">
+            <Sidebar
+              chatImageEnabled={chatImageEnabled}
+              setChatImageEnabled={setChatImageEnabled}
+              selectedChat={selectedChat}
+              setSelectedChat={setSelectedChat}
+            >
+              <ChatList
+                selectedChat={selectedChat}
+                setSelectedChat={setSelectedChat}
+              />
+            </Sidebar>
+          </div>
+        </div>
+
+        {/* Main Chat */}
+        <div className="flex-1 bg-[#121212] rounded-lg ml-0 md:ml-4 overflow-hidden">
+          <ChatArea
+            selectedChat={selectedChat}
+            setSelectedChat={setSelectedChat}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-800 p-4 mx-4 mb-4 rounded-t-lg ">
+        <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <Link
+            href="/"
+            className="text-[#E6A5A5] text-xl lg:text-2xl font-semibold"
+          >
+            Logo
+          </Link>
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+            <span className="text-sm sm:text-base">Contact@00000000.tech</span>
+            <div className="flex items-center gap-4">
+              <Link href="#" className="text-gray-400 hover:text-white">
+                <Send className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="text-gray-400 hover:text-white">
+                <Instagram className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="text-gray-400 hover:text-white">
+                <Twitter className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
