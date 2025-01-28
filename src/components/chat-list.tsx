@@ -16,8 +16,8 @@ export function ChatList({ selectedChat, setSelectedChat }: ChatListProps) {
       {chats.map((chat) => (
         <div
           key={chat.id}
-          className={`flex items-center gap-3 p-2 rounded-lg hover:bg-gray-800 cursor-pointer ${
-            selectedChat === chat.id ? "bg-gray-800" : ""
+          className={`flex items-center gap-3 p-2 rounded-lg hover:bg-white cursor-pointer ${
+            selectedChat === chat.id ? "bg-white" : ""
           }`}
           onClick={() => setSelectedChat(chat.id)}
         >

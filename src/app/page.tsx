@@ -16,7 +16,7 @@ export default function ChatInterface() {
   const [chatImageEnabled, setChatImageEnabled] = useState(true);
 
   return (
-    <div className="flex flex-col h-screen bg-black text-white">
+    <div className="flex flex-col h-screen bg-white,text-black,">
       {/* Navigation */}
       <nav className="border-b border-gray-800 p-4 m-4 mt-0 rounded-b-lg ">
         <div className="max-w-[1400px] mx-auto flex items-center justify-between">
@@ -68,7 +68,7 @@ export default function ChatInterface() {
               </SheetTrigger>
               <SheetContent
                 side="left"
-                className="w-[280px] sm:w-[320px] bg-[#121212] border-gray-800 p-6"
+                className="w-[280px] sm:w-[320px] bg-[#F8F9FA] border-gray-800 p-6"
               >
                 <Sidebar
                   chatImageEnabled={chatImageEnabled}
@@ -96,7 +96,7 @@ export default function ChatInterface() {
 
       <div className="flex flex-1 overflow-hidden mx-4 mb-4">
         {/* Sidebar - Desktop */}
-        <div className="hidden md:block w-[280px] lg:w-[320px] bg-[#121212] rounded-lg overflow-hidden">
+        <div className="hidden md:block w-[280px] lg:w-[320px] bg-[#F8F9FA] rounded-lg overflow-hidden">
           <div className="p-6 h-full overflow-y-auto">
             <Sidebar
               chatImageEnabled={chatImageEnabled}
@@ -113,7 +113,7 @@ export default function ChatInterface() {
         </div>
 
         {/* Main Chat */}
-        <div className="flex-1 bg-[#121212] rounded-lg ml-0 md:ml-4 overflow-hidden">
+        <div className="flex-1 bg-[#F8F9FA] rounded-lg ml-0 md:ml-4 overflow-hidden">
           <ChatArea
             selectedChat={selectedChat}
             setSelectedChat={setSelectedChat}
@@ -133,13 +133,13 @@ export default function ChatInterface() {
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
             <span className="text-sm sm:text-base">Contact@00000000.tech</span>
             <div className="flex items-center gap-4">
-              <Link href="#" className="text-gray-400 hover:text-white">
+              <Link href="#" className="text-gray-500 hover:text-black">
                 <Send className="w-5 h-5" />
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-white">
+              <Link href="#" className="text-gray-500 hover:text-black">
                 <Instagram className="w-5 h-5" />
               </Link>
-              <Link href="#" className="text-gray-400 hover:text-white">
+              <Link href="#" className="text-gray-500 hover:text-black">
                 <Twitter className="w-5 h-5" />
               </Link>
             </div>

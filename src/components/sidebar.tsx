@@ -21,7 +21,7 @@ export function Sidebar({
     <div className="flex flex-col h-full">
       <h2 className="text-lg font-semibold mb-4">ALL YOUR CHATS</h2>
 
-      <div className="bg-[#1E1E1E] rounded-lg p-4 mb-6">
+      <div className="bg-white rounded-lg p-4 mb-6">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <span>💬</span>
@@ -41,7 +41,7 @@ export function Sidebar({
 
       {children}
 
-      <button className="flex items-center gap-2 mt-6 text-gray-400 hover:text-white">
+      <button className="flex items-center gap-2 mt-6 text-gray600 hover:text-gray-500">
         <Plus className="w-4 h-4" />
         Create new bot
       </button>

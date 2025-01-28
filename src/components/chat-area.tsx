@@ -152,7 +152,7 @@ export function ChatArea({ selectedChat, setSelectedChat }: ChatAreaProps) {
               className={`rounded-lg p-3 max-w-[85%] sm:max-w-[70%] ${
                 message.sender === "user"
                   ? "bg-[#E6A5A5] text-black"
-                  : "bg-[#1E1E1E]"
+                  : "bg-[#EAEAEA]"
               }`}
             >
               <p>{message.content}</p>
@@ -171,7 +171,7 @@ export function ChatArea({ selectedChat, setSelectedChat }: ChatAreaProps) {
       <div className="p-4 border-t border-gray-800">
         <div className="flex gap-2 max-w-3xl mx-auto">
           <Input
-            className="bg-[#1E1E1E] border-0"
+            className="bg-gray-200 border-0"
             placeholder="Message"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
